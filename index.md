@@ -187,7 +187,7 @@ toc: false
     <div class="posts-grid">
       {% for post in site.posts limit: 10 %}
         <article class="post-card">
-          <a href="{{ post.url | relative_url }}">
+          <a href="{{ post.url | absolute_url }}">
             <h3>{{ post.title }}</h3>
             <p class="date">{{ post.date | date: "%B %d, %Y" }}</p>
             <p class="excerpt">{{ post.excerpt | strip_html | default: post.content | strip_html | truncatewords: 28 }}</p>

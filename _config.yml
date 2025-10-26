@@ -1,7 +1,7 @@
 title: "Ruihan’s Log"
 description: "Notes on Embodied Intelligence, World Models, and Robotics."
-url: "https://ruihanwu.github.io"
-baseurl: ""
+url: "https://daisy-butter.github.io"   # 你的 GitHub 用户域
+baseurl: "/ruihanwu.github.io"
 
 theme: minimal-mistakes-jekyll
 minimal_mistakes_skin: "default"
@@ -32,10 +32,6 @@ kramdown:
 
 # 语法高亮
 highlighter: rouge
-
-# 首页导航页（不显示 index）
-header_pages:
-  - about.md
 
 # 分页
 paginate: 5

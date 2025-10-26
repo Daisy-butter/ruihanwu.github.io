@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "RoboBrain 2.0"
+title: "Non-e2e VLM models"
 date: 2025-10-26
-permalink: /robobrain/
+permalink: /non-e2e-VLM/
 ---
 
 <style>

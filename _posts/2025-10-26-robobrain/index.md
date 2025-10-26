@@ -198,9 +198,7 @@ permalink: /robobrain/
 2. Wu, R. & Xi, H. *Explorations in Embodied Intelligence and Flow-based Learning*, Fudan University, 2025.
 ```
 
-
-# 这里开始正文。
-
+<!-- 这里开始markdown正文。 -->
 
 
 
@@ -208,6 +206,8 @@ permalink: /robobrain/
 
 
 
+
+<!-- 正文到这里结束。 -->
     {% endcapture %}
     {{ post_content | markdownify }}
     <!-- ✅ 上面这一行强制让 Markdown 在 HTML 中被解析 -->
@@ -220,5 +220,4 @@ permalink: /robobrain/
 </div>
 
 <script>
-  // 自动生成目录脚本保持不变
 </script>

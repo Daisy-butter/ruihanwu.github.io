@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Non-e2e VLM models"
+title: "Non-E2E VLM models"
 date: 2025-10-26
 permalink: /non-e2e-VLM/
 ---

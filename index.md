@@ -179,7 +179,7 @@ toc: false
     <div class="intro-card">
       <h1>👋 Welcome to Ruihan’s Log</h1>
       <p>
-        <em>Hi, this is ruihan. I'm interested in Embodied AI, and documenting notesin this blog about VLA, world models, etc.</em><br>
+        <em>Hi, this is ruihan. I'm interested in Embodied AI, and documenting notes in this blog about VLA, world models, etc.</em><br>
       </p>
     </div>
   </section>

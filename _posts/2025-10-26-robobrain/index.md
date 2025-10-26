@@ -169,30 +169,16 @@ permalink: /robobrain/
   body.dark-mode .post-content th { background: #333; color: #ddd; }
 </style>
 
-<div class="post-header">
-  <h1>RoboBrain 2.0: Embodied Intelligence with Multimodal Models</h1>
-  <p class="meta">October 26, 2025 • Research Note</p>
-</div>
-
-<div class="post-wrapper">
-  <div class="post-main">
-    <div class="abstract-box">
-      <strong>Abstract:</strong>  
-      RoboBrain 2.0 integrates **visual**, **language**, and **action reasoning** within an embodied framework.  
-      This post introduces the design motivation, system structure, and research outlook of RoboBrain 2.0.
-    </div>
-
     <!-- ✅ 在这里插入 markdownify 开关 -->
     {% capture post_content %}
+```
+# 一些markdown示例
 ### 1. Motivation
-The RoboBrain project aims to unify **perception**, **understanding**, and **interaction** into a coherent cognitive model for embodied agents.
+**interaction** 
 
 > “An embodied agent should not just see or act — it should *understand* the causal world it interacts with.”
 
 ---
-
-### 2. System Architecture
-Below is a simplified view of the multimodal reasoning pipeline.
 
 ![Placeholder Figure](figure1.png)
 
@@ -207,21 +193,21 @@ Below is a simplified view of the multimodal reasoning pipeline.
 | World Model | Predictive latent dynamics | Dreamer |
 | Policy | Flow-based control | MeanFlow-Q |
 
----
-
-### 3. Future Directions
-Potential next steps include:
-- Expanding multimodal grounding to tactile and audio inputs  
-- Integrating *MeanFlow policy distillation* for better stability  
-- Applying RoboBrain 2.0 in **simulation-to-real transfer** experiments  
-
----
-
 ### References
 1. BAAI. *RoboBrain 2.0: Embodied Intelligence with Multimodal World Models*, 2025.  
 2. Wu, R. & Xi, H. *Explorations in Embodied Intelligence and Flow-based Learning*, Fudan University, 2025.
+```
 
----
+
+# 这里开始正文。
+
+
+
+
+
+
+
+
     {% endcapture %}
     {{ post_content | markdownify }}
     <!-- ✅ 上面这一行强制让 Markdown 在 HTML 中被解析 -->

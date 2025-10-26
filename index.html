@@ -129,42 +129,147 @@
 
     <div class="initial-content">
       <style>
-  /* 让首页干净：隐藏顶部跳转链接和站点 masthead（全站效果） */
+  /* ---------------- 基础结构 ---------------- */
   .skip-links, .masthead, .page__title { display: none !important; }
-  /* 去掉默认顶部空白 */
   .page { padding-top: 0 !important; }
 
-  /* 背景与字体 */
-  body { background: #f7f7f7; color: #333; line-height: 1.7; }
-  .home-wrapper { max-width: 900px; margin: 0 auto; padding: 48px 16px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
 
-  /* 欢迎卡片（居中、白底、圆角阴影） */
+  :root {
+    --bg: #f7f7f7;
+    --card: #ffffff;
+    --text: #333333;
+    --subtext: #555555;
+    --shadow: rgba(0, 0, 0, 0.08);
+  }
+
+  body.dark-mode {
+    --bg: #1e1e1e;
+    --card: #2b2b2b;
+    --text: #eaeaea;
+    --subtext: #c0c0c0;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  .home-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 16px;
+  }
+
+  /* ---------------- 欢迎卡片 ---------------- */
   .intro-card {
-    background: #fff; border-radius: 18px;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
-    padding: 40px 32px; text-align: center; margin-bottom: 32px;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 4px 14px var(--shadow);
+    padding: 40px 32px;
+    text-align: center;
+    margin-bottom: 32px;
   }
   .intro-card h1 { font-size: 2.2rem; font-weight: 700; margin: 0 0 12px; }
-  .intro-card p  { font-size: 1.1rem; color: #555; }
+  .intro-card p  { font-size: 1.1rem; color: var(--subtext); }
 
-  /* “Recent Posts” 标题 */
-  .posts-section h2 { text-align: center; font-size: 1.6rem; margin: 8px 0 16px; }
-
-  /* 文章卡片：白底、圆角、阴影、悬浮提升 */
-  .posts-grid { display: flex; flex-direction: column; gap: 16px; }
-  .post-card {
-    background: #fff; border-radius: 14px; padding: 24px 28px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    transition: transform .15s ease, box-shadow .2s ease;
+  /* ---------------- 夜间模式按钮 ---------------- */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    background: var(--card);
+    color: var(--text);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    z-index: 1000;
   }
-  .post-card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,.10); }
-  .post-card h3 { margin: 0 0 6px; font-size: 1.25rem; color: #333; }
-  .post-card .date { font-size: .85rem; color: #888; margin: 0 0 8px; }
-  .post-card .excerpt { font-size: .95rem; color: #555; line-height: 1.6; }
+  .theme-toggle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px var(--shadow);
+  }
 
-  /* 可选：页脚更简洁 */
-  .page__footer { text-align: center; color: #777; font-size: .9rem; margin-top: 32px; }
+  /* ---------------- Recent Posts ---------------- */
+  .posts-section h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin: 8px 0 16px;
+  }
+
+  .posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .post-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px var(--shadow);
+  }
+
+  .post-card h3 {
+    margin: 0 0 6px;
+    font-size: 1.3rem;
+    color: var(--text);
+  }
+
+  .post-card .date {
+    font-size: 0.85rem;
+    color: var(--subtext);
+    margin-bottom: 8px;
+  }
+
+  .post-card .excerpt {
+    font-size: 0.95rem;
+    color: var(--subtext);
+    line-height: 1.6;
+  }
+
+  .page__footer {
+    text-align: center;
+    color: var(--subtext);
+    font-size: 0.9rem;
+    margin-top: 32px;
+  }
 </style>
+
+<!-- 夜间/日间模式切换按钮 -->
+<p><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button></p>
+
+<script>
+  // 记住用户选择
+  const body = document.body;
+  const btn = document.getElementById("theme-toggle");
+  const storedTheme = localStorage.getItem("theme");
+
+  if (storedTheme === "dark") {
+    body.classList.add("dark-mode");
+    btn.textContent = "🌞";
+  }
+
+  btn.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    const isDark = body.classList.contains("dark-mode");
+    btn.textContent = isDark ? "🌞" : "🌙";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+</script>
 
 <div class="home-wrapper">
 
@@ -173,8 +278,8 @@
       <h1>👋 Welcome to Ruihan’s Log</h1>
       <p>
         Hi, this is <strong>Ruihan</strong> — documenting my explorations in
-        <strong>Embodied Intelligence</strong>, <strong>World Models</strong>, and
-        <strong>Robotics Learning</strong>.
+        <strong>Embodied Intelligence</strong>, <strong>VLA</strong>, and
+        <strong>World Models</strong>.
       </p>
     </div>
   </section>
@@ -182,6 +287,16 @@
   <section class="posts-section">
     <h2>📝 Recent Posts</h2>
     <div class="posts-grid">
+      
+        <article class="post-card">
+          <a href="/2025/10/26/robobrain.html">
+            <h3>RoboBrain 2.0: Embodied Intelligence with Multimodal Models</h3>
+            <p class="date">October 26, 2025</p>
+            <p class="excerpt">RoboBrain 2.0 integrates visual-language-action reasoning through multimodal world models.
+It enables agents to learn interactive tasks grounded in perception and embodiment…
+</p>
+          </a>
+        </article>
       
     </div>
   </section>

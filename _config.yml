@@ -51,6 +51,7 @@ collections:
   posts:
     output: true
     permalink: /:title/
+    relative_directory: true
 
 include:
   - _posts

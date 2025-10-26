@@ -1,7 +1,6 @@
-# 基本信息
-title: "Embodied Intelligence Notes"
-description: "Notes on Embodied Intelligence"
-url: "https://daisy-butter.github.io/ruihanwu.github.io"
+title: "Ruihan’s Log"
+description: "Notes on Embodied Intelligence, World Models, and Robotics."
+url: "https://ruihanwu.github.io"
 baseurl: ""
 
 theme: minimal-mistakes-jekyll
@@ -18,7 +17,7 @@ plugins:
 author:
   name: "Ruihan Wu"
   avatar: "/assets/images/avatar.jpg"
-  bio: "Researching Embodied Intelligence, World Models, and Robotics."
+  bio: "Researching Embodied Intelligence and Robotics Learning."
   location: "Shanghai, China"
   email: "22307140084@m.fudan.edu.cn"
   links:
@@ -34,7 +33,7 @@ kramdown:
 # 语法高亮
 highlighter: rouge
 
-# 导航页
+# 首页导航页（不显示 index）
 header_pages:
   - about.md
 
@@ -42,7 +41,7 @@ header_pages:
 paginate: 5
 paginate_path: "/page:num/"
 
-# SASS 样式加载
+# SASS
 sass:
   style: compressed
   load_paths:

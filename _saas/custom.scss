@@ -1,0 +1,31 @@
+// _sass/custom.scss
+
+// 全局字体与颜色
+body {
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: #fafafa;
+}
+
+// 首页标题样式
+.page__title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+// 首页简介
+.page__content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+// 博文列表
+.archive__item {
+  border-radius: 12px;
+  background: white;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}

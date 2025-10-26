@@ -7,6 +7,9 @@ baseurl: ""  # leave empty for github.io sites
 # 主题（使用远程 minimal-mistakes，免去主题源码）
 theme: minimal-mistakes-jekyll
 
+minimal_mistakes_skin: "default"
+include_navbar_skip_links: false
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -46,3 +49,8 @@ paginate_path: "/page:num/"
 # 其他可选项
 exclude:
   - Gemfile.lock
+
+sass:
+  style: compressed
+  load_paths:
+    - _sass

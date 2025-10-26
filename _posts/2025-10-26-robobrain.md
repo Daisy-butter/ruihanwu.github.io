@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "Understanding Embodied Intelligence"
-date: 2025-10-27
+title: "RoboBrain 2.0: Embodied Intelligence with Multimodal Models"
+date: 2025-10-26
 ---
 
-This post explores how embodied intelligence connects perception, reasoning, and action through the lens of **world models** and **interactive learning**.
+RoboBrain 2.0 integrates visual-language-action reasoning through multimodal world models.  
+It enables agents to learn interactive tasks grounded in perception and embodiment...

@@ -136,15 +136,16 @@
   body {
     background: var(--bg);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.65;
     font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
     transition: background 0.3s ease, color 0.3s ease;
   }
 
   :root {
     --bg: #f7f7f7;
     --card: #ffffff;
-    --text: #333333;
+    --text: #2d2d2d;
     --subtext: #555555;
     --shadow: rgba(0, 0, 0, 0.08);
   }
@@ -153,7 +154,7 @@
     --bg: #1e1e1e;
     --card: #2b2b2b;
     --text: #eaeaea;
-    --subtext: #c0c0c0;
+    --subtext: #bdbdbd;
     --shadow: rgba(0, 0, 0, 0.4);
   }
 
@@ -163,28 +164,32 @@
     padding: 48px 16px;
   }
 
- /* ---------------- 欢迎区（无卡片背景） ---------------- */
-.intro-card {
-  background: transparent;   /* 背景透明 */
-  box-shadow: none;          /* 去掉阴影 */
-  border: none;              /* 无边框 */
-  text-align: center;        /* 居中 */
-  padding: 60px 32px 30px;   /* 上下留白 */
-  margin-bottom: 20px;
-}
-.intro-card h1 {
-  font-size: 2.3rem;
-  font-weight: 700;
-  margin: 0 0 16px;
-  color: var(--text);
-}
-.intro-card p {
-  font-size: 1.15rem;
-  color: var(--subtext);
-  line-height: 1.7;
-  max-width: 700px;
-  margin: 0 auto;
-}
+  /* ---------------- 欢迎区（学术化样式） ---------------- */
+  .intro-card {
+    text-align: center;
+    padding: 60px 32px 30px;
+    margin-bottom: 20px;
+    background: transparent;
+  }
+  .intro-card h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .intro-card p {
+    font-size: 1rem;
+    color: var(--subtext);
+    line-height: 1.7;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .intro-card em {
+    color: var(--text);
+    font-style: normal;
+    font-weight: 500;
+  }
 
   /* ---------------- 夜间模式按钮 ---------------- */
   .theme-toggle {
@@ -195,9 +200,9 @@
     color: var(--text);
     border: none;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
     cursor: pointer;
     box-shadow: 0 2px 6px var(--shadow);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
@@ -211,53 +216,55 @@
   /* ---------------- Recent Posts ---------------- */
   .posts-section h2 {
     text-align: center;
-    font-size: 1.6rem;
-    margin: 8px 0 16px;
+    font-size: 1.3rem;
+    letter-spacing: 0.3px;
+    color: var(--text);
+    margin: 32px 0 18px;
   }
 
   .posts-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
   .post-card {
     background: var(--card);
-    border-radius: 14px;
-    padding: 24px 28px;
-    box-shadow: 0 2px 8px var(--shadow);
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 6px var(--shadow);
     transition: transform 0.15s ease, box-shadow 0.2s ease;
   }
 
   .post-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px var(--shadow);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px var(--shadow);
   }
 
   .post-card h3 {
-    margin: 0 0 6px;
-    font-size: 1.3rem;
+    margin: 0 0 5px;
+    font-size: 1.1rem;
     color: var(--text);
+    font-weight: 600;
   }
 
   .post-card a {
-  text-decoration: none;
-  color: var(--text);
-}
+    text-decoration: none;
+    color: var(--text);
+  }
 
-.post-card a:hover h3 {
-  color: var(--text);
-}
-
+  .post-card a:hover h3 {
+    color: var(--text);
+  }
 
   .post-card .date {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--subtext);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .post-card .excerpt {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--subtext);
     line-height: 1.6;
   }
@@ -265,8 +272,8 @@
   .page__footer {
     text-align: center;
     color: var(--subtext);
-    font-size: 0.9rem;
-    margin-top: 32px;
+    font-size: 0.85rem;
+    margin-top: 36px;
   }
 </style>
 
@@ -274,16 +281,13 @@
 <p><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button></p>
 
 <script>
-  // 记住用户选择
   const body = document.body;
   const btn = document.getElementById("theme-toggle");
   const storedTheme = localStorage.getItem("theme");
-
   if (storedTheme === "dark") {
     body.classList.add("dark-mode");
     btn.textContent = "🌞";
   }
-
   btn.addEventListener("click", () => {
     body.classList.toggle("dark-mode");
     const isDark = body.classList.contains("dark-mode");
@@ -298,15 +302,14 @@
     <div class="intro-card">
       <h1>👋 Welcome to Ruihan’s Log</h1>
       <p>
-        Hi, this is <strong>Ruihan</strong> — documenting my explorations in
-        <strong>Embodied Intelligence</strong>, <strong>VLA</strong>, and
-        <strong>World Models</strong>.
+        <em>Exploring the intersection of Embodied Intelligence, World Models, and Robotics Learning.</em><br />
+        This space documents my notes, reflections, and analyses on the evolution of intelligent embodied systems — from perception and decision-making to action generation.
       </p>
     </div>
   </section>
 
   <section class="posts-section">
-    <h2>📝 Recent Posts</h2>
+    <h2>Recent Posts</h2>
     <div class="posts-grid">
       
         <article class="post-card">

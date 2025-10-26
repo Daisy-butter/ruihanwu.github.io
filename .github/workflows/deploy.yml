@@ -7,21 +7,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2
-      - run: |
-          gem install bundler
-          bundle init
-          echo 'gem "jekyll", "~> 4.3"' >> Gemfile
-          echo 'gem "minimal-mistakes-jekyll"' >> Gemfile
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          echo 'source "https://rubygems.org"' > Gemfile
+          echo 'gem "jekyll", "~> 4.3.3"' >> Gemfile
+          echo 'gem "minimal-mistakes-jekyll", "~> 4.24"' >> Gemfile
           echo 'gem "jekyll-feed"' >> Gemfile
           echo 'gem "jekyll-seo-tag"' >> Gemfile
           echo 'gem "jekyll-paginate"' >> Gemfile
           bundle install
-          bundle exec jekyll build
+
+      - name: Build site with Jekyll
+        run: bundle exec jekyll build --trace
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

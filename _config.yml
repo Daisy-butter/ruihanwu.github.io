@@ -7,6 +7,11 @@ baseurl: ""  # leave empty for github.io sites
 # 主题（使用远程 minimal-mistakes，免去主题源码）
 theme: minimal-mistakes-jekyll
 
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+
 # 作者信息
 author:
   name: "Daisy-Butter"
@@ -28,12 +33,6 @@ kramdown:
 
 # 语法高亮器
 highlighter: rouge
-
-# Plugins (GitHub Pages 支持的插件列表; remote_theme 不需要你在 Gemfile vendor 主题)
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-paginate
 
 # 导航页（在侧边栏或导航显示）
 header_pages:

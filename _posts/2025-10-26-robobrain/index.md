@@ -171,8 +171,8 @@ permalink: /robobrain/
 
     <!-- ✅ 在这里插入 markdownify 开关 -->
     {% capture post_content %}
-```
-# 一些markdown示例
+
+<!-- # 一些markdown示例
 ### 1. Motivation
 **interaction** 
 
@@ -195,13 +195,12 @@ permalink: /robobrain/
 
 ### References
 1. BAAI. *RoboBrain 2.0: Embodied Intelligence with Multimodal World Models*, 2025.  
-2. Wu, R. & Xi, H. *Explorations in Embodied Intelligence and Flow-based Learning*, Fudan University, 2025.
-```
+2. Wu, R. & Xi, H. *Explorations in Embodied Intelligence and Flow-based Learning*, Fudan University, 2025. -->
 
 <!-- 这里开始markdown正文。 -->
 
 
-
+abcd
 
 
 

@@ -169,7 +169,7 @@ permalink: /robobrain/
   body.dark-mode .post-content th { background: #333; color: #ddd; }
 </style>
 
-    <!-- ✅ 在这里插入 markdownify 开关 -->
+<!-- 在这里插入markdownify开关 -->
     {% capture post_content %}
 
 <!-- # 一些markdown示例
@@ -209,14 +209,7 @@ abcd
 <!-- 正文到这里结束。 -->
     {% endcapture %}
     {{ post_content | markdownify }}
-    <!-- ✅ 上面这一行强制让 Markdown 在 HTML 中被解析 -->
-  </div>
-
-  <aside class="post-toc" id="toc">
-    <h3>Contents</h3>
-    <ul id="toc-list"></ul>
-  </aside>
-</div>
+<!-- 上面这一行强制让 Markdown 在 HTML 中被解析。 -->
 
 <script>
 </script>

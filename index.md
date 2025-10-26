@@ -106,6 +106,16 @@ toc: false
     color: var(--text);
   }
 
+  .post-card a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.post-card a:hover h3 {
+  color: var(--text);
+}
+
+
   .post-card .date {
     font-size: 0.85rem;
     color: var(--subtext);

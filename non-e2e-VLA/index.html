@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Non-E2E VLM models - Ruihan’s Log</title>
+<!-- begin _includes/seo.html --><title>Non-E2E VLA models - Ruihan’s Log</title>
 <meta name="description" content="Notes on Embodied Intelligence, World Models, and Robotics.">
 
 
@@ -23,8 +23,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ruihan’s Log">
-<meta property="og:title" content="Non-E2E VLM models">
-<meta property="og:url" content="https://daisy-butter.github.io/ruihanwu.github.io/non-e2e-VLM/">
+<meta property="og:title" content="Non-E2E VLA models">
+<meta property="og:url" content="https://daisy-butter.github.io/ruihanwu.github.io/non-e2e-VLA/">
 
 
   <meta property="og:description" content="Notes on Embodied Intelligence, World Models, and Robotics.">
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://daisy-butter.github.io/ruihanwu.github.io/non-e2e-VLM/">
+<link rel="canonical" href="https://daisy-butter.github.io/ruihanwu.github.io/non-e2e-VLA/">
 
 
 
@@ -124,7 +124,7 @@
     <div class="initial-content">
       <article class="post-content" style="max-width:800px;margin:60px auto;padding:0 1rem;">
   <header style="margin-bottom:1.5rem;">
-    <h1 style="font-size:2rem;margin-bottom:.3rem;">Non-E2E VLM models</h1>
+    <h1 style="font-size:2rem;margin-bottom:.3rem;">Non-E2E VLA models</h1>
     <p style="color:#777;font-size:.9rem;">October 26, 2025</p>
   </header>
 
@@ -357,16 +357,16 @@ By contrast, non-end-to-end designs split the pipeline and insert intermediate r
 
 <h2 id="3-positioning-robobrain-vs-gemini-robotics-15">3. Positioning RoboBrain vs Gemini Robotics 1.5</h2>
 <h3 id="31-robobrain">3.1 RoboBrain</h3>
-<p>RoboBrain is a recently published system that explicitly decomposes robotic manipulation into <strong>Planning → Affordance Perception → Trajectory Prediction</strong>, addressing key missing capabilities in large multimodal language models when applied to robotics. :contentReference[oaicite:0]{index=0}</p>
+<p>RoboBrain is a recently published system that explicitly decomposes robotic manipulation into <strong>Planning → Affordance Perception → Trajectory Prediction</strong>, addressing key missing capabilities in large multimodal language models when applied to robotics.</p>
 <ul>
-  <li>IR: detailed affordance annotations + end-effector trajectories drawn from a heterogeneous dataset (ShareRobot) designed for long-horizon manipulation tasks. :contentReference[oaicite:1]{index=1}</li>
+  <li>IR: detailed affordance annotations + end-effector trajectories drawn from a heterogeneous dataset (ShareRobot) designed for long-horizon manipulation tasks.</li>
   <li>Category: <strong>B2 (structured IR)</strong></li>
   <li>Strengths: Clear modular separation, rich IR, strong interpretability and debug-ability.</li>
   <li>Limitations: Requires manual annotation of affordance/trajectory data; control execution still relies on traditional modules / cannot necessarily generalize to completely unseen morphologies without adaptation.</li>
 </ul>
 
 <h3 id="32-gemini-robotics-15">3.2 Gemini Robotics 1.5</h3>
-<p>While fewer peer-review publications are publicly available (some sources via media coverage), Gemini Robotics 1.5 from Google DeepMind is emblematic of a “strong IR + hybrid” architecture. :contentReference[oaicite:2]{index=2}</p>
+<p>While fewer peer-review publications are publicly available (some sources via media coverage), Gemini Robotics 1.5 from Google DeepMind is emblematic of a “strong IR + hybrid” architecture.</p>
 <ul>
   <li>IR: internal reasoning traces (chain-of-thought style), motion-transfer tokens, unified across multiple robot morphologies and tasks.</li>
   <li>Category: <strong>B3 (high IR + hybrid)</strong></li>
@@ -388,20 +388,20 @@ By contrast, non-end-to-end designs split the pipeline and insert intermediate r
 <h3 id="42-structured-ir-systems-task-graphs-waypoints">4.2 Structured IR systems (task graphs, waypoints)</h3>
 <ul>
   <li>Many recent works adopt task graph generation, 3D scene graph understanding, affordance region prediction and waypoint sequences.</li>
-  <li>For instance, the survey “A Survey on Vision-Language-Action Models for Embodied AI” (2025) provides a taxonomy and identifies clear separation of planner vs control modules. :contentReference[oaicite:3]{index=3}</li>
+  <li>For instance, the survey “A Survey on Vision-Language-Action Models for Embodied AI” (2025) provides a taxonomy and identifies clear separation of planner vs control modules.</li>
   <li>This class aligns with <strong>B2</strong>: richer IR, structured bridging of cognition and control.</li>
 </ul>
 
 <h3 id="43-hybrid--multi-embodiment-systems">4.3 Hybrid / multi-embodiment systems</h3>
 <ul>
   <li>Emerging research emphasises cross-morphology generalisation, action-tokenisation, latent plan representations, motion transfer.</li>
-  <li>Surveys like “Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey” (2025) highlight the hierarchical (planning/execution) vs monolithic dichotomy and emphasise explicit IR decoupling. :contentReference[oaicite:4]{index=4}</li>
+  <li>Surveys like “Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey” (2025) highlight the hierarchical (planning/execution) vs monolithic dichotomy and emphasise explicit IR decoupling.</li>
   <li>Such systems map directly into <strong>B3</strong>: strong IR, modular planning, and high-level generalisation.</li>
 </ul>
 
 <h3 id="44-efficiency--deployment-oriented-work">4.4 Efficiency &amp; deployment oriented work</h3>
 <ul>
-  <li>More recently, “Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey” (2025) deals with latency, model size, edge-deployment constraints in VLA systems. :contentReference[oaicite:5]{index=5}</li>
+  <li>More recently, “Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey” (2025) deals with latency, model size, edge-deployment constraints in VLA systems.</li>
   <li>Even within modular designs, there is an increasing focus on efficiency (compression, lower memory, faster inference) and real-world deployment rather than just benchmark performance.</li>
 </ul>
 
@@ -428,10 +428,10 @@ By contrast, non-end-to-end designs split the pipeline and insert intermediate r
 
 <h2 id="references">References</h2>
 <ul>
-  <li>Ji Y, Tan H, Shi J, et al. <em>RoboBrain: A Unified Brain Model for Robotic Manipulation from Abstract to Concrete</em>. CVPR 2025. :contentReference[oaicite:6]{index=6}</li>
-  <li>Shao R, Li W, Zhang L, et al. <em>Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey</em>. 2025. :contentReference[oaicite:7]{index=7}</li>
-  <li>Guan W, Hu Q, Li A, Cheng J. <em>Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey</em>. 2025. :contentReference[oaicite:8]{index=8}</li>
-  <li>Sui X, Tian D, Sun Q, et al. <em>From Grounding to Manipulation: Case Studies of Foundation Model Integration in Embodied Robotic Systems</em>. 2025. :contentReference[oaicite:9]{index=9}</li>
+  <li>Ji Y, Tan H, Shi J, et al. <em>RoboBrain: A Unified Brain Model for Robotic Manipulation from Abstract to Concrete</em>. CVPR 2025.</li>
+  <li>Shao R, Li W, Zhang L, et al. <em>Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey</em>. 2025.</li>
+  <li>Guan W, Hu Q, Li A, Cheng J. <em>Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey</em>. 2025.</li>
+  <li>Sui X, Tian D, Sun Q, et al. <em>From Grounding to Manipulation: Case Studies of Foundation Model Integration in Embodied Robotic Systems</em>. 2025.</li>
 </ul>
 
 <!-- 正文到这里结束。 -->

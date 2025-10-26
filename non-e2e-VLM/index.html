@@ -357,95 +357,81 @@ By contrast, non-end-to-end designs split the pipeline and insert intermediate r
 
 <h2 id="3-positioning-robobrain-vs-gemini-robotics-15">3. Positioning RoboBrain vs Gemini Robotics 1.5</h2>
 <h3 id="31-robobrain">3.1 RoboBrain</h3>
-<p>RoboBrain is a multi-stage MLLM-based system built for manipulation. It explicitly decomposes into Planning → Affordance Perception → Trajectory Prediction. :contentReference[oaicite:2]{index=2}</p>
+<p>RoboBrain is a recently published system that explicitly decomposes robotic manipulation into <strong>Planning → Affordance Perception → Trajectory Prediction</strong>, addressing key missing capabilities in large multimodal language models when applied to robotics. :contentReference[oaicite:0]{index=0}</p>
 <ul>
-  <li>IR: detailed affordance annotations + end-effector trajectories from the ShareRobot dataset. :contentReference[oaicite:3]{index=3}</li>
-  <li>Category: <strong>B2</strong> (structured IR)</li>
-  <li>Strengths: Clear modular separation, rich IR, interpretable.</li>
-  <li>Limitations: Requires manual annotation of affordances/trajectories; control execution still needs traditional modules.</li>
+  <li>IR: detailed affordance annotations + end-effector trajectories drawn from a heterogeneous dataset (ShareRobot) designed for long-horizon manipulation tasks. :contentReference[oaicite:1]{index=1}</li>
+  <li>Category: <strong>B2 (structured IR)</strong></li>
+  <li>Strengths: Clear modular separation, rich IR, strong interpretability and debug-ability.</li>
+  <li>Limitations: Requires manual annotation of affordance/trajectory data; control execution still relies on traditional modules / cannot necessarily generalize to completely unseen morphologies without adaptation.</li>
 </ul>
 
 <h3 id="32-gemini-robotics-15">3.2 Gemini Robotics 1.5</h3>
-<p>Gemini Robotics 1.5 from DeepMind is a multi-embodiment Vision-Language-Action model that introduces a “thinking” trace and a motion-transfer mechanism. :contentReference[oaicite:5]{index=5}</p>
+<p>While fewer peer-review publications are publicly available (some sources via media coverage), Gemini Robotics 1.5 from Google DeepMind is emblematic of a “strong IR + hybrid” architecture. :contentReference[oaicite:2]{index=2}</p>
 <ul>
-  <li>IR: internal reasoning traces, motion-transfer tokens, generalised across robot morphologies.</li>
-  <li>Category: <strong>B3</strong> (strong IR + hybrid)</li>
-  <li>Strengths: Zero-shot cross-robot generalisation; “think‐before‐act” paradigm.</li>
-  <li>Limitations: Very large scale, complex; intermediate modules less explicitly exposed; high compute demands.</li>
+  <li>IR: internal reasoning traces (chain-of-thought style), motion-transfer tokens, unified across multiple robot morphologies and tasks.</li>
+  <li>Category: <strong>B3 (high IR + hybrid)</strong></li>
+  <li>Strengths: Zero-shot cross-robot generalisation; “think before act” paradigm; potential for multi-embodiment reuse.</li>
+  <li>Limitations: System complexity is very high, intermediate modules are less transparent; high compute/training cost; details still emerging.</li>
 </ul>
 
 <hr />
 
-<h2 id="4-sample-table-of-recent-works">4. Sample table of recent works</h2>
-<p>Below is a non-exhaustive list of recent non-E2E VLA systems, with key design attributes:</p>
+<h2 id="4-broader-related-work">4. Broader related work</h2>
+<p>Beyond the two “anchor” systems above, there is a wider ecosystem of non-E2E VLA and modular embodied systems. Below are some representative works and design angles to watch.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Work</th>
-      <th>Category</th>
-      <th>IR type</th>
-      <th>Highlights</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>RoboBrain</td>
-      <td>B2</td>
-      <td>Task graph + affordance + trajectory</td>
-      <td>Modular, interpretability, large dataset ShareRobot :contentReference[oaicite:6]{index=6}</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Gemini Robotics 1.5</td>
-      <td>B3</td>
-      <td>Motion-transfer tokens + internal reasoning trace</td>
-      <td>Cross-embodiment, “think before act” :contentReference[oaicite:7]{index=7}</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>RoBridge (2025)</td>
-      <td>B2</td>
-      <td>Symbolic bridge (IOR) + planner + generalist agent</td>
-      <td>Strong sim-to-real generalisation :contentReference[oaicite:9]{index=9}</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>RoboOS (2025)</td>
-      <td>B3</td>
-      <td>Brain-Cerebellum hierarchy + real-time shared memory</td>
-      <td>Multi-agent &amp; cross-embodiment system :contentReference[oaicite:11]{index=11}</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="41-modular-pipelines-with-affordanceskill-labels">4.1 Modular pipelines with affordance/skill labels</h3>
+<ul>
+  <li>Systems such as <strong>“Do As I Can, Not As I Say”</strong> (2022/23) decompose tasks into language-level instructions and a fixed skill set, producing affordance scores and selecting from predefined skills.</li>
+  <li>These belong broadly to <strong>B1</strong> category: minimal IR (skill labels) and rely heavily on pre-scripted controllers.</li>
+</ul>
+
+<h3 id="42-structured-ir-systems-task-graphs-waypoints">4.2 Structured IR systems (task graphs, waypoints)</h3>
+<ul>
+  <li>Many recent works adopt task graph generation, 3D scene graph understanding, affordance region prediction and waypoint sequences.</li>
+  <li>For instance, the survey “A Survey on Vision-Language-Action Models for Embodied AI” (2025) provides a taxonomy and identifies clear separation of planner vs control modules. :contentReference[oaicite:3]{index=3}</li>
+  <li>This class aligns with <strong>B2</strong>: richer IR, structured bridging of cognition and control.</li>
+</ul>
+
+<h3 id="43-hybrid--multi-embodiment-systems">4.3 Hybrid / multi-embodiment systems</h3>
+<ul>
+  <li>Emerging research emphasises cross-morphology generalisation, action-tokenisation, latent plan representations, motion transfer.</li>
+  <li>Surveys like “Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey” (2025) highlight the hierarchical (planning/execution) vs monolithic dichotomy and emphasise explicit IR decoupling. :contentReference[oaicite:4]{index=4}</li>
+  <li>Such systems map directly into <strong>B3</strong>: strong IR, modular planning, and high-level generalisation.</li>
+</ul>
+
+<h3 id="44-efficiency--deployment-oriented-work">4.4 Efficiency &amp; deployment oriented work</h3>
+<ul>
+  <li>More recently, “Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey” (2025) deals with latency, model size, edge-deployment constraints in VLA systems. :contentReference[oaicite:5]{index=5}</li>
+  <li>Even within modular designs, there is an increasing focus on efficiency (compression, lower memory, faster inference) and real-world deployment rather than just benchmark performance.</li>
+</ul>
 
 <hr />
 
-<p>From the vantage — building VLA systems with modularity, interpretability, and scalability — the taxonomy suggests several design decisions:</p>
+<h2 id="5-implications-for-your-research">5. Implications for your research</h2>
+<p>From your vantage — building VLA systems with modularity, interpretability, and scalability — the taxonomy suggests several design decisions:</p>
+
 <ul>
-  <li><strong>Decide IR granularity</strong>: Will you stop at subtask labels (B1), or go as far as trajectory/code plans (B2/B3)?</li>
-  <li><strong>Select modular cut</strong>: Where will you split cognition vs execution? A clean planning module enables reuse across robots.</li>
-  <li><strong>Consider data annotation cost</strong>: Rich IR (like affordance/trajectory) improves performance but increases annotation burden.</li>
+  <li><strong>Decide your IR granularity</strong>: Will you stop at subtask labels (B1), or go as far as trajectory/code plans (B2/B3)?</li>
+  <li><strong>Select your modular cut</strong>: Where will you split cognition vs execution? A clean planning module enables reuse across robots.</li>
+  <li><strong>Consider data annotation cost</strong>: More structured IR (affordance/trajectory) improves performance but increases annotation and dataset cost.</li>
   <li><strong>Balance generality vs cost</strong>: Hybrid systems (B3) offer best generalisation across embodiments but at high infrastructure/training cost.</li>
-  <li><strong>Ensure error-handling and replanning</strong>: Modular systems allow mid-task corrections and transparent monitoring.</li>
+  <li><strong>Ensure error-handling and replanning</strong>: Modular systems allow mid-task corrections and transparent monitoring; end-to-end monoliths struggle in dynamic environments.</li>
+  <li><strong>Consider deployment constraints</strong>: Efficiency, real-time control and physical robot constraints (latency, actuation bandwidth, safety) require attention especially if targeting real-world robot systems.</li>
 </ul>
 
 <hr />
 
 <h2 id="6-conclusion">6. Conclusion</h2>
-<p>Non-end-to-end VLA architectures are emerging as a pragmatic middle way between fully monolithic control and purely symbolic planning. By injecting structured intermediate representations and decoupling cognition from execution, these systems gain interpretability, modularity, and improved generalisation.<br />
-Understanding where systems like RoboBrain and Gemini Robotics 1.5 lie in this spectrum helps clarify design trade-offs and provides a roadmap for your own system architecture.</p>
+<p>Non-end-to-end VLA architectures are emerging as a pragmatic middle way between fully monolithic control and purely symbolic planning. By injecting structured intermediate representations and decoupling cognition from execution, these systems gain interpretability, modularity, and improved generalisation. Understanding where systems like RoboBrain and Gemini Robotics 1.5 lie in this spectrum helps clarify design trade-offs and provides a roadmap for your own system architecture.</p>
 
 <hr />
 
 <h2 id="references">References</h2>
 <ul>
-  <li>Ji Y, Tan H, Shi J, et al. <em>RoboBrain: A Unified Brain Model for Robotic Manipulation from Abstract to Concrete</em>. CVPR 2025. :contentReference[oaicite:12]{index=12}</li>
-  <li>Google DeepMind. <em>Gemini Robotics 1.5: Pushing the Frontier of Generalist Robots with Advanced Embodied Reasoning, Thinking, and Motion Transfer</em>. 2025. :contentReference[oaicite:13]{index=13}</li>
-  <li>Zhang K, Xu R, et al. <em>RoBridge: A Hierarchical Architecture Bridging Cognition and Execution for General Robotic Manipulation.</em> 2025. :contentReference[oaicite:14]{index=14}</li>
-  <li>Tan H, Hao X, et al. <em>RoboOS: A Hierarchical Embodied Framework for Cross-Embodiment and Multi-Agent Collaboration.</em> 2025. :contentReference[oaicite:15]{index=15}</li>
+  <li>Ji Y, Tan H, Shi J, et al. <em>RoboBrain: A Unified Brain Model for Robotic Manipulation from Abstract to Concrete</em>. CVPR 2025. :contentReference[oaicite:6]{index=6}</li>
+  <li>Shao R, Li W, Zhang L, et al. <em>Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey</em>. 2025. :contentReference[oaicite:7]{index=7}</li>
+  <li>Guan W, Hu Q, Li A, Cheng J. <em>Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey</em>. 2025. :contentReference[oaicite:8]{index=8}</li>
+  <li>Sui X, Tian D, Sun Q, et al. <em>From Grounding to Manipulation: Case Studies of Foundation Model Integration in Embodied Robotic Systems</em>. 2025. :contentReference[oaicite:9]{index=9}</li>
 </ul>
 
 <!-- 正文到这里结束。 -->

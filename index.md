@@ -180,7 +180,6 @@ toc: false
       <h1>👋 Welcome to Ruihan’s Log</h1>
       <p>
         <em>Exploring the intersection of Embodied Intelligence, World Models, and Robotics Learning.</em><br>
-        This space documents my notes, reflections, and analyses on the evolution of intelligent embodied systems — from perception and decision-making to action generation.
       </p>
     </div>
   </section>

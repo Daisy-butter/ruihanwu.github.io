@@ -9,8 +9,11 @@ layout: default
   </header>
 
   <div class="content" style="line-height:1.7;font-size:1.05rem;color:#333;">
+    <style>
+        .content img { display: block; margin: 1.5rem auto; max-width: 100%; border-radius: 6px; }
+    </style>
     {{ content }}
-  </div>
+    </div>
 
   <footer style="margin-top:3rem;text-align:center;color:#aaa;font-size:.85rem;">
     <p>← <a href="{{ '/' | relative_url }}" style="color:#007acc;text-decoration:none;">Back to Home</a></p>

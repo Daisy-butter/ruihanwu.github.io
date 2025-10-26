@@ -40,17 +40,28 @@ toc: false
     padding: 48px 16px;
   }
 
-  /* ---------------- 欢迎卡片 ---------------- */
-  .intro-card {
-    background: var(--card);
-    border-radius: 18px;
-    box-shadow: 0 4px 14px var(--shadow);
-    padding: 40px 32px;
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  .intro-card h1 { font-size: 2.2rem; font-weight: 700; margin: 0 0 12px; }
-  .intro-card p  { font-size: 1.1rem; color: var(--subtext); }
+ /* ---------------- 欢迎区（无卡片背景） ---------------- */
+.intro-card {
+  background: transparent;   /* 背景透明 */
+  box-shadow: none;          /* 去掉阴影 */
+  border: none;              /* 无边框 */
+  text-align: center;        /* 居中 */
+  padding: 60px 32px 30px;   /* 上下留白 */
+  margin-bottom: 20px;
+}
+.intro-card h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--text);
+}
+.intro-card p {
+  font-size: 1.15rem;
+  color: var(--subtext);
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+}
 
   /* ---------------- 夜间模式按钮 ---------------- */
   .theme-toggle {

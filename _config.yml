@@ -50,3 +50,14 @@ sass:
 # 其他
 exclude:
   - Gemfile.lock
+
+collections:
+  posts:
+    output: true
+    permalink: /:title/
+
+include:
+  - _posts
+  - _layouts
+  - index.md
+  - about.md

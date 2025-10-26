@@ -5,7 +5,7 @@ url: "https://github.com/Daisy-butter/ruihanwu.github.io" # 改成你的仓库 U
 baseurl: ""  # leave empty for github.io sites
 
 # 主题（使用远程 minimal-mistakes，免去主题源码）
-remote_theme: "mmistakes/minimal-mistakes"
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 
 # 作者信息
 author:

@@ -1,63 +1,66 @@
-// 全局背景与字体
+/* 全局背景与字体 */
 body {
   background-color: #f5f5f5;
   font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
 
-/* 首页主体容器居中 */
+/* 首页容器居中 */
 .home-container {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
 }
 
 /* 欢迎区 */
 .intro-card {
   background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 3rem;
   text-align: center;
   margin-bottom: 3rem;
 }
 
 .intro-title {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .intro-text {
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.8;
   color: #555;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-/* 博文列表标题 */
+/* Recent Posts 标题 */
 .recent-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 1.2rem;
+  color: #333;
 }
 
-/* 每篇博文卡片 */
+/* 博文卡片 */
 .post-card {
   background: #ffffff;
   border-radius: 14px;
-  padding: 1.5rem 1.8rem;
+  padding: 1.6rem 1.8rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .post-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
 }
 
 .post-card h3 {
-  margin: 0 0 0.4rem 0;
+  margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
   color: #333;
 }
@@ -81,4 +84,12 @@ body {
   font-size: 0.95rem;
   color: #555;
   line-height: 1.6;
+}
+
+/* 页脚居中 */
+.page__footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 3rem;
 }

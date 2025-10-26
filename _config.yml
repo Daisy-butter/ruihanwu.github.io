@@ -1,15 +1,14 @@
 # 基本信息
 title: "Embodied Intelligence Notes"
 description: "Notes on Embodied Intelligence"
-url: "https://github.com/Daisy-butter/ruihanwu.github.io" # 改成你的仓库 URL
-baseurl: ""  # leave empty for github.io sites
+url: "https://daisy-butter.github.io/ruihanwu.github.io"
+baseurl: ""
 
-# 主题（使用远程 minimal-mistakes，免去主题源码）
 theme: minimal-mistakes-jekyll
-
 minimal_mistakes_skin: "default"
 include_navbar_skip_links: false
 
+# 插件
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -17,40 +16,38 @@ plugins:
 
 # 作者信息
 author:
-  name: "Daisy-Butter"
+  name: "Ruihan Wu"
   avatar: "/assets/images/avatar.jpg"
-  bio: "研究方向：具身智能 / Embodied AI"
+  bio: "Researching Embodied Intelligence, World Models, and Robotics."
   location: "Shanghai, China"
   email: "22307140084@m.fudan.edu.cn"
   links:
     - label: "GitHub"
-      url: "https://github.com/your-username"
-    - label: "Twitter"
-      url: "https://twitter.com/yourhandle"
+      url: "https://github.com/Daisy-butter"
 
-# 页面配置
+# Markdown 与数学公式
 markdown: kramdown
 kramdown:
   input: GFM
   math_engine: mathjax
 
-# 语法高亮器
+# 语法高亮
 highlighter: rouge
 
-# 导航页（在侧边栏或导航显示）
+# 导航页
 header_pages:
-  - index.md
   - about.md
 
 # 分页
 paginate: 5
 paginate_path: "/page:num/"
 
-# 其他可选项
-exclude:
-  - Gemfile.lock
-
+# SASS 样式加载
 sass:
   style: compressed
   load_paths:
     - _sass
+
+# 其他
+exclude:
+  - Gemfile.lock

@@ -1,14 +1,7 @@
 ---
-layout: splash
+layout: default
 title: "👋 Welcome to Ruihan’s Log"
 permalink: /
-header:
-  overlay_color: "#f9f9f9"
-  overlay_filter: 0.0
-  caption: ""
-excerpt: >
-  Hi, this is Ruihan. I’m documenting my learning notes on **Embodied Intelligence**,  
-  **World Models**, and **Robotics**. Stay tuned for my reflections, experiments, and readings.
 ---
 
 <div class="home-container">

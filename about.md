@@ -4,7 +4,7 @@ title: "About"
 permalink: /about/
 ---
 
-**你的名字**  
-研究方向：具身智能（Embodied AI）、世界模型、机器人学习。
+**Ruihan Wu (吴睿涵)**  
+Research interests: Embodied Intelligence, World Models, and Robotics Learning.  
 
-联系方式：youremail@example.com
+Contact: 22307140084@m.fudan.edu.cn

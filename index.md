@@ -187,15 +187,16 @@ toc: false
   <section class="posts-section">
     <h2>Recent Posts</h2>
     <div class="posts-grid">
-      {% for post in site.posts limit: 10 %}
+    {% for post in site.data.posts %}
         <article class="post-card">
-          <a href="{{ post.url | absolute_url }}">
+            <a href="{{ post.url | absolute_url }}">
             <h3>{{ post.title }}</h3>
             <p class="date">{{ post.date | date: "%B %d, %Y" }}</p>
-            <p class="excerpt">{{ post.excerpt | strip_html | default: post.content | strip_html | truncatewords: 28 }}</p>
-          </a>
+            <p class="excerpt">{{ post.excerpt }}</p>
+            </a>
         </article>
-      {% endfor %}
+    {% endfor %}
+
     </div>
   </section>
 

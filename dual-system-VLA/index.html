@@ -312,17 +312,17 @@
 <h3 id="minedreamer">MineDreamer</h3>
 <p>MineDreamer embodies an implicit factorization: a world-model-based System-2 predicts future states and evaluates action consequences, while a System-1 executor tracks and minimizes the latent distance toward the desired goal embedding. The <strong>Goal Q-former</strong> distills language-conditioned semantic targets into a latent embedding space, enabling visually grounded imagination without textual dispatch during execution.</p>
 
-<p><img src="./MineDreamer.png" alt="MineDreamer" width="600" /></p>
+<p><img src="/assets/img/dual-system-vla/MineDreamer.png" alt="MineDreamer" width="600" /></p>
 
 <h3 id="metaqueries">MetaQueries</h3>
 <p>MetaQueries infers a latent <strong>skill semantic embedding</strong> from observed behavior, enabling a robot to “understand” <em>what</em> skill is being performed and reproduce it in new contexts. The planner and the controller communicate purely through the latent skill representation, capturing generalizable structure beyond explicit affordance labels or trajectories.</p>
 
-<p><img src="./MetaQueries.png" alt="MetaQueries" /></p>
+<p><img src="/assets/img/dual-system-vla/MetaQueries.png" alt="MetaQueries" width="600" /></p>
 
 <h3 id="knowledge-insulating-vla-models-pi05-ki-family">Knowledge-Insulating VLA Models (pi0.5-KI family)</h3>
 <p>A crucial innovation in this line of work is <strong>allowing gradients from execution to flow back</strong> to the cognitive module, while protecting linguistic knowledge from being corrupted by noisy action supervision. Semantic adapters restrict the updates to <em>execution-relevant</em> representation dimensions — achieving beneficial bidirectional learning while preserving language/world understanding.</p>
 
-<p><img src="./KI-VLA.png" alt="KI-VLA" /></p>
+<p><img src="/assets/img/dual-system-vla/KI-VLA.png" alt="KI-VLA" /></p>
 
 <hr />
 
@@ -332,24 +332,24 @@
 <h3 id="internvla-n1--internvla-m1">InternVLA-N1 / InternVLA-M1</h3>
 <p>These systems divide the brain into <strong>a VLM planner (System-2)</strong> and <strong>a diffusion-based motion policy (System-1)</strong>. Navigation (N1) employs pixel or latent goal tokens, while manipulation (M1) leverages explicit spatial grounding and operational hints. Crucially, execution is often asynchronous, enabling high-frequency control without blocking planning.</p>
 
-<p><img src="./InternVLA-N1.png" alt="InternVLA-N1" /></p>
+<p><img src="/assets/img/dual-system-vla/InternVLA-N1.png" alt="InternVLA-N1" /></p>
 
-<p><img src="./InternVLA-M1.png" alt="InternVLA-M1" /></p>
+<p><img src="/assets/img/dual-system-vla/InternVLA-M1.png" alt="InternVLA-M1" /></p>
 
 <h3 id="saycan">SayCan</h3>
 <p>SayCan pioneered the modern “LLM planner → skill executor” split. A language model selects skills conditioned on <em>affordance Q-values</em>, ensuring that what the LLM suggests is physically executable. This explicit IR-based decision filter became a canonical blueprint for dual-system alignments.</p>
 
-<p><img src="./SayCan.png" alt="SayCan" /></p>
+<p><img src="/assets/img/dual-system-vla/SayCan.png" alt="SayCan" /></p>
 
 <h3 id="robodual">RoboDual</h3>
 <p>RoboDual takes modularity further: a <strong>Generalist System-2</strong> performs task reasoning and selects both skills and control modes, while <strong>Specialist System-1</strong> controllers are optimized for specific motion regimes. End-to-end gradient flow enables System-2 to gradually understand embodiment constraints without sacrificing structure.</p>
 
-<p><img src="./RoboDual.png" alt="RoboDual" /></p>
+<p><img src="/assets/img/dual-system-vla/RoboDual.png" alt="RoboDual" /></p>
 
 <h3 id="robobrain">RoboBrain</h3>
 <p>RoboBrain enriches System-2 reasoning with <strong>affordance perception and detailed trajectory IR</strong>, yielding strong transparency and physical feasibility. Although still modular, it covers long-horizon manipulation more effectively by grounding the planner in scene understanding.</p>
 
-<p><img src="./RoboBrain.png" alt="RoboBrain" /></p>
+<p><img src="/assets/img/dual-system-vla/RoboBrain.png" alt="RoboBrain" /></p>
 
 <hr />
 
@@ -359,22 +359,22 @@
 <h3 id="vla-r1">VLA-R1</h3>
 <p>Trained with <strong>SFT + GRPO</strong>, VLA-R1 learns an internal separation between <em>understanding</em> and <em>execution</em>: SFT shapes the model’s semantic and syntactic action space, while GRPO sculpts motion quality and safety. It behaves as if a System-2 policy head supervises a System-1 motor head — but both share a single neural substrate.</p>
 
-<p><img src="./VLA-R1.png" alt="VLA-R1" /></p>
+<p><img src="/assets/img/dual-system-vla/VLA-R1.png" alt="VLA-R1" /></p>
 
 <h3 id="univla">UniVLA</h3>
 <p>UniVLA integrates vision-language alignment, world-model post-training, and policy learning <em>all within a single autoregressive model</em>: no explicit modular boundaries exist. Yet, its unified token space implicitly carries both System-2 knowledge and System-1 feasibility — a trend toward fully integrated cognitive-motor architectures.</p>
 
-<p><img src="UniVLA.png" alt="UniVLA" /></p>
+<p><img src="/assets/img/dual-system-vla/UniVLA.png" alt="UniVLA" /></p>
 
 <h3 id="gemini-robotics-series">Gemini Robotics Series</h3>
 <p>Gemini-Robotics models can be viewed as evolving toward <strong>a universal brain</strong> capable of reasoning and acting through latent action tokens. Though the exact IR remains opaque, it is clear the model orchestrates planning and control jointly inside a shared transformer world-model.</p>
 
-<p><img src="./Gemini.png" alt="Gemini" /></p>
+<p><img src="/assets/img/dual-system-vla/Gemini.png" alt="Gemini" /></p>
 
 <h3 id="worldvla">WorldVLA</h3>
 <p>A general transformer world-model is trained to predict action-conditioned future observations and then refined through policy learning. Cognition and execution are ultimately inseparable within this causal predictive substrate — embodying the long-term convergence of dual-system ideas.</p>
 
-<p><img src="./WorldVLA.png" alt="WorldVLA" /></p>
+<p><img src="/assets/img/dual-system-vla/WorldVLA.png" alt="WorldVLA" /></p>
 
 <hr />
 

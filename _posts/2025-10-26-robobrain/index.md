@@ -186,17 +186,17 @@ Some VLA architectures avoid exposing the intermediate representation explicitly
 ### MineDreamer
 MineDreamer embodies an implicit factorization: a world-model-based System-2 predicts future states and evaluates action consequences, while a System-1 executor tracks and minimizes the latent distance toward the desired goal embedding. The **Goal Q-former** distills language-conditioned semantic targets into a latent embedding space, enabling visually grounded imagination without textual dispatch during execution.
 
-![MineDreamer](/assets/img/dual-system-vla/MineDreamer.png){: width="600" }
+![MineDreamer](.{.{site.baseurl}.}/assets/img/dual-system-vla/MineDreamer.png)
 
 ### MetaQueries
 MetaQueries infers a latent **skill semantic embedding** from observed behavior, enabling a robot to “understand” *what* skill is being performed and reproduce it in new contexts. The planner and the controller communicate purely through the latent skill representation, capturing generalizable structure beyond explicit affordance labels or trajectories.
 
-![MetaQueries](/assets/img/dual-system-vla/MetaQueries.png){: width="600" }
+![MetaQueries](.{.{site.baseurl}.}/assets/img/dual-system-vla/MetaQueries.png)
 
 ### Knowledge-Insulating VLA Models (pi0.5-KI family)
 A crucial innovation in this line of work is **allowing gradients from execution to flow back** to the cognitive module, while protecting linguistic knowledge from being corrupted by noisy action supervision. Semantic adapters restrict the updates to *execution-relevant* representation dimensions — achieving beneficial bidirectional learning while preserving language/world understanding.
 
-![KI-VLA](/assets/img/dual-system-vla/KI-VLA.png)
+![KI-VLA](.{.{site.baseurl}.}/assets/img/dual-system-vla/KI-VLA.png)
 
 ---
 
@@ -206,24 +206,24 @@ Other systems emphasize clearly articulated IR that reflects task structure, spa
 ### InternVLA-N1 / InternVLA-M1
 These systems divide the brain into **a VLM planner (System-2)** and **a diffusion-based motion policy (System-1)**. Navigation (N1) employs pixel or latent goal tokens, while manipulation (M1) leverages explicit spatial grounding and operational hints. Crucially, execution is often asynchronous, enabling high-frequency control without blocking planning.
 
-![InternVLA-N1](/assets/img/dual-system-vla/InternVLA-N1.png)
+![InternVLA-N1](.{.{site.baseurl}.}/assets/img/dual-system-vla/InternVLA-N1.png)
 
-![InternVLA-M1](/assets/img/dual-system-vla/InternVLA-M1.png)
+![InternVLA-M1](.{.{site.baseurl}.}/assets/img/dual-system-vla/InternVLA-M1.png)
 
 ### SayCan
 SayCan pioneered the modern “LLM planner → skill executor” split. A language model selects skills conditioned on *affordance Q-values*, ensuring that what the LLM suggests is physically executable. This explicit IR-based decision filter became a canonical blueprint for dual-system alignments.
 
-![SayCan](/assets/img/dual-system-vla/SayCan.png)
+![SayCan](.{.{site.baseurl}.}/assets/img/dual-system-vla/SayCan.png)
 
 ### RoboDual
 RoboDual takes modularity further: a **Generalist System-2** performs task reasoning and selects both skills and control modes, while **Specialist System-1** controllers are optimized for specific motion regimes. End-to-end gradient flow enables System-2 to gradually understand embodiment constraints without sacrificing structure.
 
-![RoboDual](/assets/img/dual-system-vla/RoboDual.png)
+![RoboDual](.{.{site.baseurl}.}/assets/img/dual-system-vla/RoboDual.png)
 
 ### RoboBrain
 RoboBrain enriches System-2 reasoning with **affordance perception and detailed trajectory IR**, yielding strong transparency and physical feasibility. Although still modular, it covers long-horizon manipulation more effectively by grounding the planner in scene understanding.
 
-![RoboBrain](/assets/img/dual-system-vla/RoboBrain.png)
+![RoboBrain](.{.{site.baseurl}.}/assets/img/dual-system-vla/RoboBrain.png)
 
 ---
 
@@ -238,17 +238,17 @@ Trained with **SFT + GRPO**, VLA-R1 learns an internal separation between *under
 ### UniVLA
 UniVLA integrates vision-language alignment, world-model post-training, and policy learning *all within a single autoregressive model*: no explicit modular boundaries exist. Yet, its unified token space implicitly carries both System-2 knowledge and System-1 feasibility — a trend toward fully integrated cognitive-motor architectures.
 
-![UniVLA](/assets/img/dual-system-vla/UniVLA.png)
+![UniVLA](.{.{site.baseurl}.}/assets/img/dual-system-vla/UniVLA.png)
 
 ### Gemini Robotics Series
 Gemini-Robotics models can be viewed as evolving toward **a universal brain** capable of reasoning and acting through latent action tokens. Though the exact IR remains opaque, it is clear the model orchestrates planning and control jointly inside a shared transformer world-model.
 
-![Gemini](/assets/img/dual-system-vla/Gemini.png)
+![Gemini](.{.{site.baseurl}.}/assets/img/dual-system-vla/Gemini.png)
 
 ### WorldVLA
 A general transformer world-model is trained to predict action-conditioned future observations and then refined through policy learning. Cognition and execution are ultimately inseparable within this causal predictive substrate — embodying the long-term convergence of dual-system ideas.
 
-![WorldVLA](/assets/img/dual-system-vla/WorldVLA.png)
+![WorldVLA](.{.{site.baseurl}.}/assets/img/dual-system-vla/WorldVLA.png)
 
 ---
 

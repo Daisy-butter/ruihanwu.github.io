@@ -169,6 +169,9 @@ permalink: /dual-system-VLA/
   body.dark-mode .post-content th { background: #333; color: #ddd; }
 </style>
 
+<!-- 在这里插入markdownify开关 -->
+    {% capture post_content %}
+
 <!-- 这里开始markdown正文。 -->
 
 Large-scale Vision-Language-Action (VLA) research has recently shifted toward *dual-system architectures*, where high-level cognition and low-level control co-exist but operate differently. A common analogy draws on the human **System-2 (cortex)** — capable of abstract reasoning, task understanding, and planning — and **System-1 (cerebellum/spinal circuit)** — responsible for fast, reactive motor control. However, the implementation varies dramatically across recent embodied AI systems.  
@@ -263,8 +266,8 @@ This unified view aims to help researchers navigate the rapidly expanding VLA la
 ---
 
 <!-- 正文到这里结束。 -->
-{% endcapture %}
-{{ post_content | markdownify }}
+  {% endcapture %}
+  {{ post_content | markdownify }}
 
 <!-- 上面这一行强制让 Markdown 在 HTML 中被解析。 -->
 

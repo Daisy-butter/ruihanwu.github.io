@@ -238,7 +238,7 @@ Trained with **SFT + GRPO**, VLA-R1 learns an internal separation between *under
 ### UniVLA
 UniVLA integrates vision-language alignment, world-model post-training, and policy learning *all within a single autoregressive model*: no explicit modular boundaries exist. Yet, its unified token space implicitly carries both System-2 knowledge and System-1 feasibility — a trend toward fully integrated cognitive-motor architectures.
 
-![UniVLA](.{.{site.baseurl}.}/assets/img/dual-system-vla/UniVLA.png)
+![UniVLA]({{site.baseurl}}/assets/img/dual-system-vla/UniVLA.png)
 
 ### Gemini Robotics Series
 Gemini-Robotics models can be viewed as evolving toward **a universal brain** capable of reasoning and acting through latent action tokens. Though the exact IR remains opaque, it is clear the model orchestrates planning and control jointly inside a shared transformer world-model.

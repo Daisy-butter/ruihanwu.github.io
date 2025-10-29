@@ -233,7 +233,7 @@ Some state-of-the-art foundation models **emulate dual-system behavior inside a 
 ### VLA-R1
 Trained with **SFT + GRPO**, VLA-R1 learns an internal separation between *understanding* and *execution*: SFT shapes the model’s semantic and syntactic action space, while GRPO sculpts motion quality and safety. It behaves as if a System-2 policy head supervises a System-1 motor head — but both share a single neural substrate.
 
-![VLA-R1] (.{.{ site.baseurl }.}/assets/img/dual-system-vla/VLA-R1.png)
+![VLA-R1]({{ site.baseurl }}/assets/img/dual-system-vla/VLA-R1.png)
 
 ### UniVLA
 UniVLA integrates vision-language alignment, world-model post-training, and policy learning *all within a single autoregressive model*: no explicit modular boundaries exist. Yet, its unified token space implicitly carries both System-2 knowledge and System-1 feasibility — a trend toward fully integrated cognitive-motor architectures.

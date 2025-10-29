@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Non-E2E VLA models"
+title: "Dual System VLA Approach"
 date: 2025-10-26
-permalink: /non-e2e-VLA/
+permalink: /dual-system-VLA/
 ---
 
 <style>
@@ -169,105 +169,103 @@ permalink: /non-e2e-VLA/
   body.dark-mode .post-content th { background: #333; color: #ddd; }
 </style>
 
-<!-- 在这里插入markdownify开关 -->
-    {% capture post_content %}
-
 <!-- 这里开始markdown正文。 -->
 
-In this post I survey a growing class of **non-end-to-end Vision-Language-Action (VLA)** systems. These architectures deliberately decouple high-level cognition (vision + language → plan) from low-level control (plan → motion/trajectory), introducing structured intermediate representations (IR). Two prominent paradigms — exemplified by RoboBrain and Gemini Robotics 1.5 — highlight divergent design choices in how cognition and execution are connected, and provide a useful lens for surveying broader work.
+Large-scale Vision-Language-Action (VLA) research has recently shifted toward *dual-system architectures*, where high-level cognition and low-level control co-exist but operate differently. A common analogy draws on the human **System-2 (cortex)** — capable of abstract reasoning, task understanding, and planning — and **System-1 (cerebellum/spinal circuit)** — responsible for fast, reactive motor control. However, the implementation varies dramatically across recent embodied AI systems.  
+
+This blog post provides a high-level overview of these systems, focusing specifically on **how System-2 and System-1 are constructed**, **what forms the intermediate representation (IR)** between them, and **how gradients or knowledge flow across the divide**.
 
 ---
 
-## 1. Why go “non-E2E” in VLA?  
-End-to-end VLA systems — inputting raw vision + language and directly emitting motor commands — are appealing in their simplicity, but pose significant difficulties:  
-- **Lack of modular interpretability**: it is difficult to trace “why” a robot chose a certain motion.  
-- **Poor error recovery or replanning**: when mid-task states drift, end-to-end systems struggle to adapt.  
-- **Limited cross-embodiment generalization**: monolithic policies often over-fit to one robot morphology.  
-By contrast, non-end-to-end designs split the pipeline and insert intermediate representations (IR), enabling clearer division of labour, easier debugging, plug-in modules and better generalisation.
+## 1️⃣ Dual-System with **implicit latent IR**
+Some VLA architectures avoid exposing the intermediate representation explicitly, instead encoding planning information and task semantics in latent vectors that are consumed directly by the controller. 
+
+### MineDreamer
+MineDreamer embodies an implicit factorization: a world-model-based System-2 predicts future states and evaluates action consequences, while a System-1 executor tracks and minimizes the latent distance toward the desired goal embedding. The **Goal Q-former** distills language-conditioned semantic targets into a latent embedding space, enabling visually grounded imagination without textual dispatch during execution.
+
+![MineDreamer](MineDreamer.png)
+
+### MetaQueries
+MetaQueries infers a latent **skill semantic embedding** from observed behavior, enabling a robot to “understand” *what* skill is being performed and reproduce it in new contexts. The planner and the controller communicate purely through the latent skill representation, capturing generalizable structure beyond explicit affordance labels or trajectories.
+
+![MetaQueries](MetaQueries.png)
+
+### Knowledge-Insulating VLA Models (pi0.5-KI family)
+A crucial innovation in this line of work is **allowing gradients from execution to flow back** to the cognitive module, while protecting linguistic knowledge from being corrupted by noisy action supervision. Semantic adapters restrict the updates to *execution-relevant* representation dimensions — achieving beneficial bidirectional learning while preserving language/world understanding.
+
+![KI-VLA](KI-VLA.png)
 
 ---
 
-## 2. A taxonomy of non-E2E VLA systems  
-I organise the space along two key dimensions:  
-1. **Cognition vs Execution**: Are planning and control implemented in separate modules?  
-2. **Intermediate Representation (IR) complexity**: Does the system produce a simple label (e.g., subtask tag), a structured task graph, or a full trajectory/code-plan?  
+## 2️⃣ Dual-System with **explicit intermediate structure**
+Other systems emphasize clearly articulated IR that reflects task structure, spatial geometry, or sub-goal semantics, typically yielding stronger interpretability and controllability.
 
-| Class | Description | IR type | Example systems |
-|:--|-------------|---------|----------------|
-| **B1** – Planner + Controller (Minimal IR) | High-level module produces a subtask or skill label, passed to a pre-scripted controller. | Skill label / textual sub-goal | SayCan-style systems |
-| **B2** – Planner + Structured IR + Controller | Adds explicit structured IR (subtask sequence, affordance graph, waypoints) bridging planning and control. | Task graph, affordance map, waypoint trajectory | RoboBrain |
-| **B3** – Multi-system / Hybrid (Strong IR + some end-to-end) | Strong cognition and strong execution, with latent/action-token IR, cross-embodiment transfer, multi-robot policy. | Code plan, motion transfer tokens, latent action token sequence | Gemini Robotics 1.5 |
+### InternVLA-N1 / InternVLA-M1
+These systems divide the brain into **a VLM planner (System-2)** and **a diffusion-based motion policy (System-1)**. Navigation (N1) employs pixel or latent goal tokens, while manipulation (M1) leverages explicit spatial grounding and operational hints. Crucially, execution is often asynchronous, enabling high-frequency control without blocking planning.
 
----
+![InternVLA-N1](InternVLA-N1.png)
 
-## 3. Positioning RoboBrain vs Gemini Robotics 1.5  
-### 3.1 RoboBrain  
-RoboBrain is a recently published system that explicitly decomposes robotic manipulation into **Planning → Affordance Perception → Trajectory Prediction**, addressing key missing capabilities in large multimodal language models when applied to robotics.
-- IR: detailed affordance annotations + end-effector trajectories drawn from a heterogeneous dataset (ShareRobot) designed for long-horizon manipulation tasks.
-- Category: **B2 (structured IR)**  
-- Strengths: Clear modular separation, rich IR, strong interpretability and debug-ability.  
-- Limitations: Requires manual annotation of affordance/trajectory data; control execution still relies on traditional modules / cannot necessarily generalize to completely unseen morphologies without adaptation.
+![InternVLA-M1](InternVLA-M1.png)
 
-### 3.2 Gemini Robotics 1.5  
-While fewer peer-review publications are publicly available (some sources via media coverage), Gemini Robotics 1.5 from Google DeepMind is emblematic of a “strong IR + hybrid” architecture. 
-- IR: internal reasoning traces (chain-of-thought style), motion-transfer tokens, unified across multiple robot morphologies and tasks.  
-- Category: **B3 (high IR + hybrid)**  
-- Strengths: Zero-shot cross-robot generalisation; “think before act” paradigm; potential for multi-embodiment reuse.  
-- Limitations: System complexity is very high, intermediate modules are less transparent; high compute/training cost; details still emerging.
+### SayCan
+SayCan pioneered the modern “LLM planner → skill executor” split. A language model selects skills conditioned on *affordance Q-values*, ensuring that what the LLM suggests is physically executable. This explicit IR-based decision filter became a canonical blueprint for dual-system alignments.
+
+![SayCan](SayCan.png)
+
+### RoboDual
+RoboDual takes modularity further: a **Generalist System-2** performs task reasoning and selects both skills and control modes, while **Specialist System-1** controllers are optimized for specific motion regimes. End-to-end gradient flow enables System-2 to gradually understand embodiment constraints without sacrificing structure.
+
+![RoboDual](RoboDual.png)
+
+### RoboBrain
+RoboBrain enriches System-2 reasoning with **affordance perception and detailed trajectory IR**, yielding strong transparency and physical feasibility. Although still modular, it covers long-horizon manipulation more effectively by grounding the planner in scene understanding.
+
+![RoboBrain](RoboBrain.png)
 
 ---
 
-## 4. Broader related work  
-Beyond the two “anchor” systems above, there is a wider ecosystem of non-E2E VLA and modular embodied systems. Below are some representative works and design angles to watch.
+## 3️⃣ “Quasi Dual-System”: single-model **internal factorization**
+Some state-of-the-art foundation models **emulate dual-system behavior inside a unified transformer**, blending reasoning, future prediction, and execution.
 
-### 4.1 Modular pipelines with affordance/skill labels  
-- Systems such as **“Do As I Can, Not As I Say”** (2022/23) decompose tasks into language-level instructions and a fixed skill set, producing affordance scores and selecting from predefined skills.  
-- These belong broadly to **B1** category: minimal IR (skill labels) and rely heavily on pre-scripted controllers.
+### VLA-R1
+Trained with **SFT + GRPO**, VLA-R1 learns an internal separation between *understanding* and *execution*: SFT shapes the model’s semantic and syntactic action space, while GRPO sculpts motion quality and safety. It behaves as if a System-2 policy head supervises a System-1 motor head — but both share a single neural substrate.
 
-### 4.2 Structured IR systems (task graphs, waypoints)  
-- Many recent works adopt task graph generation, 3D scene graph understanding, affordance region prediction and waypoint sequences.  
-- For instance, the survey “A Survey on Vision-Language-Action Models for Embodied AI” (2025) provides a taxonomy and identifies clear separation of planner vs control modules.  
-- This class aligns with **B2**: richer IR, structured bridging of cognition and control.
+![VLA-R1](VLA-R1.png)
 
-### 4.3 Hybrid / multi-embodiment systems  
-- Emerging research emphasises cross-morphology generalisation, action-tokenisation, latent plan representations, motion transfer.  
-- Surveys like “Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey” (2025) highlight the hierarchical (planning/execution) vs monolithic dichotomy and emphasise explicit IR decoupling.   
-- Such systems map directly into **B3**: strong IR, modular planning, and high-level generalisation.
+### UniVLA
+UniVLA integrates vision-language alignment, world-model post-training, and policy learning *all within a single autoregressive model*: no explicit modular boundaries exist. Yet, its unified token space implicitly carries both System-2 knowledge and System-1 feasibility — a trend toward fully integrated cognitive-motor architectures.
 
-### 4.4 Efficiency & deployment oriented work  
-- More recently, “Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey” (2025) deals with latency, model size, edge-deployment constraints in VLA systems.   
-- Even within modular designs, there is an increasing focus on efficiency (compression, lower memory, faster inference) and real-world deployment rather than just benchmark performance.
+![UniVLA](UniVLA.png)
 
----
+### Gemini Robotics Series
+Gemini-Robotics models can be viewed as evolving toward **a universal brain** capable of reasoning and acting through latent action tokens. Though the exact IR remains opaque, it is clear the model orchestrates planning and control jointly inside a shared transformer world-model.
 
-## 5. Implications for your research  
-From your vantage — building VLA systems with modularity, interpretability, and scalability — the taxonomy suggests several design decisions:
+![Gemini](Gemini.png)
 
-- **Decide your IR granularity**: Will you stop at subtask labels (B1), or go as far as trajectory/code plans (B2/B3)?  
-- **Select your modular cut**: Where will you split cognition vs execution? A clean planning module enables reuse across robots.  
-- **Consider data annotation cost**: More structured IR (affordance/trajectory) improves performance but increases annotation and dataset cost.  
-- **Balance generality vs cost**: Hybrid systems (B3) offer best generalisation across embodiments but at high infrastructure/training cost.  
-- **Ensure error-handling and replanning**: Modular systems allow mid-task corrections and transparent monitoring; end-to-end monoliths struggle in dynamic environments.  
-- **Consider deployment constraints**: Efficiency, real-time control and physical robot constraints (latency, actuation bandwidth, safety) require attention especially if targeting real-world robot systems.
+### WorldVLA
+A general transformer world-model is trained to predict action-conditioned future observations and then refined through policy learning. Cognition and execution are ultimately inseparable within this causal predictive substrate — embodying the long-term convergence of dual-system ideas.
+
+![WorldVLA](WorldVLA.png)
 
 ---
 
-## 6. Conclusion  
-Non-end-to-end VLA architectures are emerging as a pragmatic middle way between fully monolithic control and purely symbolic planning. By injecting structured intermediate representations and decoupling cognition from execution, these systems gain interpretability, modularity, and improved generalisation. Understanding where systems like RoboBrain and Gemini Robotics 1.5 lie in this spectrum helps clarify design trade-offs and provides a roadmap for your own system architecture.
+## Closing Perspective
+Across all these lines, we witness a compelling trajectory:
+
+> Early systems established **clear dual-system decomposition**,  
+> while recent models increasingly pursue **fully unified architectures**  
+> — where planning and control co-evolve within a single world-model.
+
+Yet, the **intermediate representation** remains the linchpin. Whether explicit (waypoints, affordances, spatial relations) or implicit (skill latent, future-state imagination), the IR determines how **System-2 knowledge** shapes **System-1 execution** — and how the body teaches the brain.
+
+This unified view aims to help researchers navigate the rapidly expanding VLA landscape with clarity on the essential design choices shaping embodied intelligence.
 
 ---
-
-## References  
-- Ji Y, Tan H, Shi J, et al. *RoboBrain: A Unified Brain Model for Robotic Manipulation from Abstract to Concrete*. CVPR 2025. 
-- Shao R, Li W, Zhang L, et al. *Large VLM-based Vision-Language-Action Models for Robotic Manipulation: A Survey*. 2025. 
-- Guan W, Hu Q, Li A, Cheng J. *Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey*. 2025. 
-- Sui X, Tian D, Sun Q, et al. *From Grounding to Manipulation: Case Studies of Foundation Model Integration in Embodied Robotic Systems*. 2025. 
-
-
 
 <!-- 正文到这里结束。 -->
-    {% endcapture %}
-    {{ post_content | markdownify }}
+{% endcapture %}
+{{ post_content | markdownify }}
+
 <!-- 上面这一行强制让 Markdown 在 HTML 中被解析。 -->
 
 <script>

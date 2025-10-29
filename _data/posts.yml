@@ -1,6 +1,4 @@
-- title: "Non-E2E VLA models"
+- title: "Dual System VLA Approach"
   date: 2025-10-26
-  url: /non-e2e-VLA/
-  excerpt: "This note focuses on relative work about non end-to-end VLA models for embodied AI tasks."
-
-# 每篇文章都需要登记。
+  url: /dual-system-VLA/
+  excerpt: "This note focuses on relative work about dual system VLA models for embodied AI tasks."
